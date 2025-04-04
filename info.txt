@@ -1,0 +1,415 @@
+a simple react app is like importing react 
+we can inject react into our  html file without using create react app,
+or any other framework...
+it can just be  used inside script 
+
+The one thing using cdn (content delivery network) link doesn't work if internet is not connect
+because cdn link is hosted online 
+
+so to make it locally we have to install react locally
+
+we can create a react element just like we create using vanilla javascript 
+
+syntax ->  React.createElement('a',{href:"dwwdw.com"},click)
+it takes 3 arguments and returns a a tag/element'
+in the object we can put anything we want not just id, class, href.. these is known as props (properties )
+when we log it , it shows that it is an object . so we can say that it returns an object 
+
+React.createElement ==> object ==> HTML(DOM)
+
+
+when we pass the react element / inject it into our html page
+it parses the create element and inject our element into html
+
+syntax -> ReactDOM.createRoot()
+        root.render()
+
+we uses ReactDOM because it is the react implementation for webpage
+React is our core library and ReactDOM is its implementation for webpage
+and render is the method inside ReactDOM    
+
+#NOTE
+so the render method only applies on react root/ not on native DOM element
+meaning before react 18 we use to use ReactDOM.render(component you wanted to render , root you want to render at)
+
+but after react18 we made it spereatly to render it so we first create a root and then render it.
+
+so finally we can say that render only works on react root 
+
+---------------------
+
+BUNDLER - it is used to optimize our js app..
+thier are various BUNDLER like vite, parcel,webpack 
+
+bundler is a kind of package
+and a package need package-manager
+npm/yarn is a package-manager
+
+
+Our react app requires various packages in order to make it smoothly
+like it requires to minify our project, optimize it , bundle it together 
+thus it takes other packages 
+
+
+so inorder to manage the package we use npm, these makes all the Dependencies into one 
+we have other options like yarn
+
+we uses npm init -y  in order to install npm  which is a package manager
+so from now onwards we uses npm to install other library into our project 
+and bundler like parcel to ignite our app 
+npm install -D parcel 
+        -D means we are taking development verion of parcel (Dev Dependency)
+        in simple words it gets install into our development environment 
+
+syntax-->   "devDependencies": {
+    "parcel": "^2.14.4"
+}
+this gets injected to our package.json file 
+
+Dependency means out projcet is dependent on packages
+
+
+also about the terminologies we should aware of 
+^ --> these is known as carot,meaning : it will update you to all future patch versions, without incrementing the minor version. ~1.2.3 will use releases from 1.2.3 to <1.3.
+~ --> these is known as tilde, meaning :It will update you to all future minor/patch versions, without incrementing the major version. ^2.3.4 will use releases from 2.3.4 to <3.0.0
+  
+
+
+what is package-lock.json
+package-lock.json is the final/ production verison of our project.. it locks various things like the verion of parcel
+like we our ^(carrot) upgrades the version locally but the package.lock, doesn't affects our production code 
+
+so if we put our package-lock.json in git ignore then it creates issure like it is working in my pc but doesn't work in production
+
+node modules is like a database of our npm, it stores all the Dependency, minifiers(it optimize our code)
+we should not add node modules into our github , because our package-lock.json has sufficient information to generate the node modules
+node modules are too high thus we should never sent it to github
+
+
+
+now we have so many Dependencies in our node modules and also it is better so install react in our local server
+as it is each to fetch react locally then depending for cdn 
+syntax->
+        npm install react
+
+also we have to install react DOM
+syntax->
+        npm install react-dom 
+
+to ignite our app we uses 
+syntax->
+        npx parcel index.html
+
+
+
+--------
+
+also we can't just import in our script file, in order to do it we have to make the script type as modules
+
+we can see that if we make any changes in our file it automatically  gets reflected , without us have to refresh it 
+
+these is known as hot module reload (HMR), and who make changes? -> parcel
+parcel uses file file watcher algorithm which dectes any changes made into our file and reflects it 
+
+
+
+---------
+few configs in our package.json
+the main:"app.js" -> these refers to the entry point 
+        meaning from these point our project starts/begins
+        but using parcel we explicitly tell where to start so we don't need these
+
+-----------
+what is parcel-cache file
+parcel automatically does HMR, so it keep track of the files, so inorder to do, it need some space ,and it uses parcel-cache as its space
+
+-------
+what is dist file / build      
+
+SO when you build your project meaning sent it to production, dist file makes stores out build files meaning it 
+minifies our project and store it in a efficient way, 
+dist creates a faster development version of our project
+ 
+
+ 
+------------------
+what does parcel does ?
+        HMR - Hot module replacement 
+        Bundling 
+        minify
+        Cleaning the code 
+        Dev and production build 
+        Super-Fast build algorithm
+        Image Optimization
+        Caching while development
+        Compression
+        Compatble with older verion of browser 
+        Https on dev
+        port number
+        Consistent hashing algorithm
+        Zero Config
+        Transitive Dependencies --> Dependency depending on other Dependency
+        Tree-shaking -> removing unwanted code 
+
+
+
+-----------------
+Why is react fast ?
+react itself is very fast , not only it has virtual dom but it has other things like bundler, why does various 
+things as above mentioned, it act as a catalyst.
+
+
+--------
+Dependency Tree
+our react and parcel has various Dependencies, they form a tree like structure because other other Dependencies they relay on 
+these is known as Dependency tree 
+
+
+-------------
+browserlist 
+browser list is a props in our package.json which is also in build in our parcel bundler
+it provides with how many browser  is our app compatible with
+adding something into it means that it will be always be running/ optimized onto that perticular browser 
+
+some browser supports older verison  of code thus we have to convert our code 
+and bable converts our newer code into older code 
+in simple words our browserlist takes which you want your app to be support 
+and bable convers it into the older version of it  , that older version of code is known as pollyfill 
+
+
+---------------------
+parcel doesn't remove console log, so we  have to install a plugin to remove console log 
+also you will get to know who to install plugin
+
+go to bable plugin console log remove, and copy the code 
+it will reflect in our npm(package.json)
+
+
+
+--------------------------------
+Key warning 
+when we pass childern into our react element 
+it gives warning like the child must have unique Key
+these is due to 2 stuff
+1. react does it so that it can optimize our rendering phase 
+   meaning if their is a list and we add another list with one more element in it 
+   then react gives us warning of childern must have unique Key
+2. also if we want to fetch then in react we do it on the basis of key 
+
+so giving key would make re-rendering easy 
+
+
+---------------
+if we want to create a navbar from what we have learnt till now it would be hard in terms of like we 
+have to append many childs to it, so we uses JSX to make it smoothly
+
+JSX
+
+bable is the one which parses these kind of syntax, it looks like html in js but it is  html like element known as jsx expression
+const head = (
+        <h1 key:"dwdw" >
+        hello 
+        </h1>
+)this is also known as element 
+
+jsx uses react.createElement ==> object==> HTML(DOM)   --> these is internal working 
+
+
+---------------
+their are  2 package-lock.json
+second one was inside the node modules , second one keep the track of Transitive Dependencies, all the files inside the 
+node modules are the one which get tracked using the second package-lock.json
+
+
+---------------
+Component
+types of component 
+1. functional component
+2. class based component
+
+
+1. functional component
+it is normal js function which returns a piece of jsx 
+syntax --> name of component starts with capital leter (convention)
+
+const header = ()=>{
+    return <h2>HEllo </h2>
+}
+     
+
+Component Composition --> when we uses component inside a component is known as component Composition
+
+--------------
+Bable also converts/transpile jsx meaning it accepts the syntax of jsx and 
+convert the code so the code we write in jsx, bable which is present in node modules
+which again came from parcel does it 
+
+
+--------------
+Any piece of jsx we write it must only have one parent component
+jsx can only have one parent 
+
+ 
+React.Fragment ->  it is a component(element) which react give inorder to bundle things
+it is like a empty tag -> <></>  
+
+
+
+
+
+--------
+Config driven UI -> our UI changes based on situation
+we control our UI based on configurations 
+
+--------
+props 
+ they are like attribute,  which gets passes into the function
+ props bind the attribute in the form of object so we can't use the attribute directly 
+ in order to access the value inside the props we have to just access it the way we access a object
+
+ so the senario would be props={
+        attribute:value,
+        attribute2:value
+ }
+
+we we can destructure it and pass only the variable which is required , that can be done too 
+
+--------------------
+virtual dom - it is a representation of the actual dom 
+             and react ueses reconsiliation on algorithm to differentiate one tree with another
+             to find out what needs to be updated and it rerenders the node and its childern part  that is changed 
+        the process is known as reconsiliation
+        diff algorithm is the one which differentiate between the changes in the new tree and the previous tree, with respect to its node 
+it differentiate btwn element of the node (childern) on the basis of key
+
+----------------------
+
+Exporting the component 
+2 ways to do it 
+
+1.default export --> where we can only export one component 
+ while importing it we can normally import it the way we use to import 
+ we can also rename the import if we use default export
+
+2. named Export --> where we export a perticular constant and while importing 
+ it we have to extract a that from like we use to import createRoot from react-dom
+
+if their are multiple exports and when importing it we can import it all together
+like import * as XYZ , then use XYZ.header 
+
+---------------
+we also create a config.js file , in which we put all the hardcoded stuff 
+it is a convention , some companys uses constants file   
+  
+-------------------
+
+local varibale in react , we can't change it the way we use to do it in vanilla js 
+we need a react varibale  , a react variable is a kind of state variable
+
+every component in react maintains a state, so we can put varibale into that state
+everytime you have to put local variable you use state in it  
+
+so we uses  useState hook to create a varibale in react
+hook is just a function, every hook has a specific function
+
+
+useState --> it is used to create a local state variable and 
+useState is a function which returns a array where first element is a variable a
+and second element  a function which changes the variable
+
+
+why to need useState-->  when we use js variable in react and if we update it , react can't able to
+keep up/ know that it is updated , and won't be re-rendering 
+so react came up with react varibale, and changing it would re-render the UI 
+react keeps a track of state variable
+react has one way binding meaning chaning one thing wouldn't change at other place unless done explicitly
+
+
+---------------
+how rendering is being handled by react-- in a good way, like it checks the state variable being changed and it automatically 
+renders it  
+
+
+
+-----------
+a fundamental thing --> a array of string and i want to return a array which has target, inside filter should i use includes or == ?
+includes will return a array if has a substring , and == will only return the exact value , if not understanding what i said just chatgpt the
+exact thing 
+
+
+
+------------
+React fibre is the implementation of reacts algorithm for rendering.
+it is a complete new way to rendering unlike virtual dom where rendering was done through reconsiliation
+virtual dom is in simple words the reconsiliation algorithm, now we use react fibre meaning thier is no virtual dom
+it address the issue like animation,layout and gesture 
+like if their were one state which got affected and while rendering it another state also came to render , 
+so rather than doing both one by one why not do it all at once 
+features of fibre over reconsiliation is it provides priority to state, also it somewhat wait for a time to re-render multiple things
+
+fibre features-
+        pause work and come back later
+        assign priority to different type of work
+        abort work if no longer needed 
+   
+----------------------
+Re-rendering and component changing
+so if their is a component and inside it we change a state of it, so the whole component will be
+re-render and only the changes part will be updated by the means of diff algorithm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+what i learn today
+react is 1 way binding
+virtual dom
+reconsiliation
+react fibre
+search filter 
+render data using an API , using useEffect
+CROS
+
+
+
+
+
+
+
+
+
+
+to learn
+react dom
+react fibre
+hooks 
+state
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
