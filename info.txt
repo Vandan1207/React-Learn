@@ -359,6 +359,45 @@ re-render and only the changes part will be updated by the means of diff algorit
 
 
 
+-----------
+MicroService
+Instade of one project we have different project for UI, API, notification , logs etc
+thse architecture is known as MicroService
+sepreation of concern        
+
+
+
+
+Monolithic
+thier is only one project and all the parts like sms, API, UI, notification all the code in one project
+these architecture is known as monolith
+
+
+
+---------------------
+useEffect
+        it is a hook which is used to do something , when its Dependency gets hit 
+        it takes a callback function
+ 
+
+
+-------------------------
+NOTE ->
+        so we say that inside  {} we say that we can write any piece of js in it 
+        but we can't write like {
+                let a =10;
+                console.log(a)
+        } 
+        we can't do it , we can only write js expression on it 
+        their is a difference btwn js expression and statement
+
+        but in order to run it we can do , by converting it into statement
+        {
+                ((a=10),console.log(a))
+        }
+
+
+----------------
 
 
 
@@ -369,32 +408,27 @@ re-render and only the changes part will be updated by the means of diff algorit
 
 
 
-
-
-
-what i learn today
-react is 1 way binding
-virtual dom
-reconsiliation
-react fibre
-search filter 
-render data using an API , using useEffect
-CROS
+early return
+project vipul 
+conditional rendering 
+shimmer UI, loading page
+no match your query
 
 
 
 
+to complete
+shimmer 
+early return
+loading
 
 
 
 
 
 
-to learn
-react dom
-react fibre
-hooks 
-state
+
+
 
 
 
