@@ -1,0 +1,71 @@
+so their are mainly three ways to style your app 
+inline --> which has the highest priority but it mustn't not be used 
+internal--> it has lower priority but it is used in react in some places for reuseability
+external --> it is easy but too long to maintain it     
+
+we uses library to style our UI like materialUI, scss, baseUI, AntUi, chakra UI
+all these library gives us build-in components, easy to maintain , also 
+gives consistency in our UI 
+
+at the end of the day all these library are packages
+
+cons of using library --> makes our bundle heavy, custom UI is hard
+
+types of ways to style our component:
+        external css
+        inline
+        Styled component
+        library
+        tailwind css framework
+
+
+----------------------------------------------------------
+Tailwind 
+    Css on the go --> in the same file 
+    flexible UI 
+     
+
+configuring our tailwind
+so first is that we can use cdn link of tailwind 
+EVERY THING IN TAILWIND IS CLASS , IF WE WANT TO ADD CSS TO IT, IT IS DONE ON THE
+BASIS OF CLASSES
+
+example -->    <h1 class="font-bold" > Hello World</h1>
+this is the way to make our h1 bold 
+
+tailwind is overrides our css and makes it his way of writing css 
+
+now for building project we should install tailwind package
+
+
+for writing tailwind we have a suggestion extension , it is similar to normal css just that it has 
+predefined classes with css attached to it, and we are using that classes .
+
+like class="mt-1" so it will give margin top of 4px , to give custom css like certain width we do dynamic css
+syntax class ="mt-[30px]" , so it will  give the perticular css we want 
+
+now comes the usage like when we see our css in the dom then it will give us the only css we wrote in our file,
+like in production the css we wrote that perticular css will only be shipped, not the whole tailwind css package 
+
+our parcel converts the tailwind css, and also optimize it 
+
+
+
+cons of tailwind --> hard to read, less readability, too long line of code 
+
+
+pros of tailwind --> no duplicate css, bundle time is small , more customizable,
+a lot more control over the css
+
+
+
+
+
+
+----------
+to complete 
+ways to learning css 
+    what after css in react like which library should i have knowledge of ?
+    material -UI
+    scss
+media query
