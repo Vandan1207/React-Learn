@@ -214,6 +214,11 @@ const head = (
 
 jsx uses react.createElement ==> object==> HTML(DOM)   --> these is internal working 
 
+also when we pass key as a prop to a component then we can't use it inside that component, like their is a componet 
+that returns some jsx and in the component we did some logic and we used key like prop.key, then if we thought that 
+we can use it like these, then we can't props.key will give us undefined 
+
+
 
 ---------------
 their are  2 package-lock.json
@@ -276,8 +281,9 @@ we we can destructure it and pass only the variable which is required , that can
 
 --------------------
 virtual dom - it is a representation of the actual dom 
-             and react ueses reconsiliation on algorithm to differentiate one tree with another
-             to find out what needs to be updated and it rerenders the node and its childern part  that is changed 
+
+         and react ueses reconsiliation algorithm to differentiate one tree with another
+         to find out what needs to be updated and it rerenders the node and its childern part  that is changed 
         the process is known as reconsiliation
         diff algorithm is the one which differentiate between the changes in the new tree and the previous tree, with respect to its node 
 it differentiate btwn element of the node (childern) on the basis of key
@@ -378,7 +384,8 @@ these architecture is known as monolith
 useEffect
         it is a hook which is used to do something , when its Dependency gets hit 
         it takes a callback function
- 
+ it is called once after the render 
+
 
 
 -------------------------
@@ -398,6 +405,202 @@ NOTE ->
 
 
 ----------------
+React Router Dom package is used to route between pages 
+to install it use npm install react-router-dom
+
+so like routing means if we want to got to other page
+like if we click swiggy.com and click on a resturant 
+then it goes to swiggy.com/resturant
+these is known as rounting 
+
+
+so in order to do it we will have to config the routing 
+so first is to extract the router from the package we installed 
+
+we uses createBrowserRouter as a router , and import it from react-router
+
+so createBrowserRouter is used to specify all the rounting rotues 
+here we mentione all the routing inside it 
+
+also we also need to tell out app that these is our routings 
+to do it we have RouterProvider from react-router
+it is a component which we place in render and as a prop we pass our routing routes 
+also it is compulsory to use router as our prop name
+
+import {createBrowserRouter,RouterProvider} from 'react-router';
+
+const routers= createBrowserRouter([
+    {
+        path:"/",
+        element:<Layout/>
+    },
+    {
+        path:"/about",
+        element:<About/>
+    }
+]) 
+root.render(<RouterProvider router={routers} />);
+
+
+
+-----------
+also out react-router provieds with error handing too 
+so react-router provides with a hook -> useRouteError
+so these hook automatically catches what type of error it is 
+and provides an output accordingly
+
+
+---------------
+now how to go to another pages 
+so in plain html we uses <a>  tag and then in href we used to write ="/about"
+so these way we will route to other pages
+
+but these causes the whole page to re-render , so react-router provides us with 
+a link tag , these is similar to a tag and we uses to="/about" 
+for redirecting it to a target page
+
+but when we see in html dom it will show a <a> tag , so internally link tag uses 
+<a> tag , and gets converted to <a> tag 
+
+
+------------
+dynamic routing , multi-rounting, conditional rounting
+Outlet
+
+
+
+-----------
+when we route our pages from one page to another and we want to put something like our header and footer as common we uses 
+dynamic rounting or also known as multi-routing where we have a parent element and add childern to it
+as a concept lets understand first and then the code 
+suppose we have a parent layout , what does it have it have 3 component 
+a header, body and a footer 
+then we have a child component which is about page and as a whole page it also have  footer and header in it 
+so what we do , we take the common part and also we use dynamic routing 
+meaning we will go from our parent's route to our child's route 
+
+so in the rotuer, which is our createBrowserRouter( ), in the parent object , we will add our childern which is about in it 
+and we will specify path to it, and when the route is hit it will go to it 
+also we have to specify how it will render , we have only specifyed its route, not we have to add Outlet which is from Our
+react-router package
+
+Outlet is used to render out childern's 
+
+code -> 
+const Layout =()=>{
+    return(
+        <>
+        <Header/>
+        <Outlet/>
+        <Footer/>
+        </>
+    )
+}
+
+const routers= createBrowserRouter([
+    {
+        path:"/",
+        element:<Layout/>,
+        errorElement:<Error/>,
+        children:[
+            {   path:"/contact",
+                element:<Contact/>
+            },
+            {
+                path:"/",
+                element:<Body/>
+            },{
+                path:"/about",
+                element:<About/>
+            },
+            {
+                path:"/resturant/:id",
+                element:<Cards />
+            }
+        ]
+
+    },
+]) 
+
+if we want to nested our router
+
+also i don't know that if we had dynamic routing meanig we had : in our url and then anything 
+after it would be dynamic, 
+        example -> url-> abc/:id
+so if we call abc/odod ,then anything after abc would be dynamic and react will say that does it match inital path 
+and after that it is dynamic 
+
+so the thing to be remembered is that when we use useParams hook to get what we have called in the dynamic part 
+it will return us an object based on what we have written in the dynamic path
+
+like it will return us the id:"odod" ,as we have written id as our key in the dynamic path 
+
+
+
+
+
+------------------------
+Class based Component
+
+just like functional component at the end of the day is a function 
+similarlly class based component is a class
+
+syntax-->
+we have to tell react that these class is a component class not just
+a simple class , here we have a render method , just we have to return in render
+
+class profile extends React.Component{
+    render(){
+        return (
+            <></>
+        )
+    }
+}
+
+so the term render, re-render for our component comes from here as their is no redern 
+in the functional component, but we always say that it gets render, so the term render in 
+component comes from class based component 
+
+
+we can dop the same thing like creating a state and managing it too
+syntax
+
+class profile extends React.Component{
+    constructor(props){
+        super(props)
+
+        this.state({
+            count:0
+        })
+    }
+    render(){
+        return (
+            <button onclick={()=>{
+                this.setState({
+                    count:{this.state.count}+1
+                })
+            }}></>
+            <h1>this.props.name</h2> (way of accessing a prop)
+        )
+    }
+}
+
+-----------------------------
+
+so when we do multi routing like when we have multiple childern
+ and  we know that we use Outlet to render childern , but what if we want to pass props 
+ to childern in Outlet, so we have to do 2 things 
+
+ first while sending something in props we have to name out prop as context={the data we are sending }
+
+and in order to use it we have to use a hook called as useOutletContext, which is used to catch the props 
+const data = useOutletContext()
+
+in  these way we send and recive props in Outlet
+
+
+
+--------------------------------------
 
 
 
@@ -408,19 +611,187 @@ NOTE ->
 
 
 
-early return
-project vipul 
-conditional rendering 
-shimmer UI, loading page
-no match your query
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------
+
+now while learing basics about the classbased component we have few component inside it 
+which are 
+componentdidMount() which is called after render --> best for API call 
+componentupdate() which is called after every state change (render) 
+componentwillunmount() which is called after every component's unmounthing , when we stwitch to another Component
+
+this could be understand by the follow lifecycle diagram , remember it is only for classbased component
+
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+also adding into it, we have 2 phase in out lifecycle, render phase and commit phase 
+our constructor and render is in render phase 
+and our commit phase will have changing the dom componentdidMount
+
+
+this could be understood by the means of an example
+their is a parent component 
+then we have 2 child component 
+
+what would be the rendering process be like --> all are classbased component 
+
+parent constructor 
+parent render
+child1 constructor
+child1 render
+child2 constructor
+child2 render 
+chil1 componentdidMount
+child2 componentdidMount
+parent componentdidMount
+
+
+
+ React waits until all children are mounted and their side effects are handled, 
+ then fires componentDidMount on the parent.
+
+
+--------------------------------
+similar to these we have in our functional component is useEffect
+we can pass an [] , in useEffect , so it will call only once and after render
+also similar to componentwillunmount, we have return in useEffect , that 
+would be returned once it gets unmounted,meaning after the component is changed
+
+
+---------------------------
+async and await's rendering
+so when we write a async function in react , especially in useEffect, then the execution context is little different
+so when thier is async we know that it will parallel start execution , but when await hit reacts checks that is their 
+any render left ? like any state update, i have left to render, as we know that react batches the state update
+
+
+
+
+-------------------------------
+custom hook (useablility, readability, sepreation of concern , Testable, Maintainable)
+
+custom hook is a helper function which have a logic in it and returns some data
+it is like grouping logic and state, where logic is performed , is known as custom hook
+
+the one thing to be remember is that when we create a state inside our custom hook then the changes 
+or state updates inside it that it will reflect in the component where we called custom hook 
+
+example--> const data = useResturant(id);
+
+so useResturant is our custom hook and it will return resturant details for that id , and we have created a state in the useResturant, then 
+if the state changes it will refect in the data too 
+it is like makeing a state but here a value is given to us based on some attribute it is like writing 
+        const[resturantDetails,setResturantDetails]= useState()
+just a difference is here we get some value based on my input 
+
+
+
+it changes the way we think and write code , like if someone says in my project that i want to build a feature
+then we would build a custom hook and offload all the logic to it , and then our main component will use that hook 
+and get the required result and do rendering accordingly
+
+
+-------------------------------
+Chunking / Code Splitting / dynamic bundling / lazy loading / On-Demand loading / Dynamic Import
+
+when the app gets large in terms of component , our bundler combines all the file into 1 js file 
+but it is not good to sent all the app once, like bundle it all together, these makes our app slow 
+it is good to break the file into meaningful parts (logical bundles)
+
+so lets suppose their is an instamart portion which has 100 component in it, it is all together a diffrent section
+here section means like a another part , all the parts gets differentiate in the system design by the senior developers
+so lets first understand how to do it, we got to know that where to do it (in instamart we need to do it ), but now how to do it 
+
+
+so in our header we have instamart link , and it consist of 100's of component in it 
+so lazy loading is mentioned in the component which we are importing it, in simple words we are importing our instamart into the app.js 
+where all the path is mentioned, here is the place we do lazy loading 
+
+so we will import differently 
+syntax --> const Instamart= lazy(()=>import("./instamart"))
+
+but on the first click it won't be rendered as when react tries to load it , it doesn't have the script of that 
+component at the moment as in the network we can see like it took 30ms to load the instamart script 
+but when we come back and front again we can see , as now the script is loaded 
+
+although we can't see these problem locally as our bundler will load things fast and also preloads the chuck files too
+but in production it is different 
+so when we do lazy we have to use suspense  
+  
+
+so we have wrap it, syntax-->      {
+                path:"/instamart",
+                element: <Suspense fallback={<Simmer/>} >
+                            <Instamart />
+                        </Suspense>
+            }
+
+also it takes fallback as a prop where we can pass a component which will be  shown till our instamart is not loaded 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 to complete
-shimmer 
-early return
-loading
+cart feature
+
+
+------------------------------
+knowlegde
+Formik ---> is a package which helps to make form easily 
+make your code follow these 5 practice 
+Modular -> meaningfuly broken our code into piece
+Reuseale -> 
+Maintainable
+Testable
+Cleaner 
+
+
+
+Never compare react's lifecycle for functional component
+
+
+---------------------------
+
+
+
+
+
+
+
+
+to write
 
 
 
@@ -430,15 +801,66 @@ loading
 
 
 
-
-
-
-
-
-
-
-
+Que?
+cdn
+why cdn to store img 
+componentdidMount is async and useEffect can't make async why ?
+we i wrote simple resturant in body , but in dom it is showing some different html , like data-discovery = true , why?
  
+
+
+
+to complete
+create a hook returning -->  [var,setVar]
+forms in react  
+
+
+
+to learn
+hmr server
+client side rendering server side rendering
+routing 
+react router
+cdn
+createHash rotuer
+other router than create browser router
+classbased component --> constructor->super(props)
+behind the scenes of setstate in classbased
+how rendering is done in my code --> each component rerender one 
+redux thunk
+multithread in js 
+creating your own library
+
+
+
+
+
+learn today
+passing props in the nested routing 
+class based component 
+redux--> action
+reducer
+slice
+store
+state
+
+
+
+
+
+
+
+
+
+
+
+
+---------
+General Ans --> why our app is fast ?
+it is not just because of reacts virtual dom , but because of parcel , bundlers, react's reconsiliation algorithm
+react fibre , react-router, minification etc....
+
+
 
 
 

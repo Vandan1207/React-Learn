@@ -1,0 +1,344 @@
+thier is one layer which is UI layer which our user interact with 
+but thier is a data layer which is just down the app layer which is responisble
+for data on the UI 
+
+
+The data layer consist of the state and the props like they maintained the data in the app and when 
+we go from one component to another these data in the form of state and prop is being showed 
+
+
+
+we all know that bable conerts our jsx, and their is a virtual dom and their is 
+something known as diff of previous virtual dom and the current virtual dom and between
+them the changes that is present is then been changed in the actual dom
+thier is something known as reconsiliation , which is rendering only the changed part 
+i am not sure please look into it 
+
+
+
+
+Prop Driling --> when we pass a prop from parenet to subchild , these passing of data is known as prop Driling
+            cons --> we have to give data to component which is not even using it 
+                    also it will re-render a lot of component when we change a prop 
+                    makes our code cluter--> unnecessary variable
+
+If multiple components need access to the same data or behavior → lift state up to the common parent.
+
+
+if we want to pass the data from child to parent we can do it and have multiple ways --> custom hook 
+
+ 
+
+resusing component--> as we think that outlet is for these resusing , no outlet is for rendering childerns 
+resusing a component means we define a component and it will take certain details as a props and will render it
+so we can use that component and will give props to it and can reuse it anywhere 
+
+
+
+
+
+Profiler --> these is a thing provided by react dev tools , we can record the user 
+journey in the app and can see what all things our app has done in the back when the user
+flows into our app
+it provides with the things like which component is taking time to load, so we can do 
+things like optimization based on my 
+
+
+-------------------------------------------------------
+so now lets think like if we want to something like username and password across 
+all the component in the app , then what we have to do is like props drilling but as we 
+know that it comes with its cons , so if we want something global that react has its own state management 
+known as context api 
+
+It is like shared state across the app, any component can use it
+so how to do it 
+
+create a seprate file for each context, like for user context which will store user details , like for cart etc...
+
+import createContext form react 
+
+const userContext = createContext({
+        name:"vandan",
+        age:1
+})
+export default userContext
+like we created a userContext which is an object (in simpler words) which is now accessible all across our app
+
+now to use the context anywhere in the app we use a hook called useContext provided by react
+
+const user = useContext(userContext);
+
+when it comes to class based component it doesn't have hooks so in order to use context in class-based component
+so in the return we use it in the form of component like  
+
+        <userContext.Consumer>
+                {(val)=>console.log(val)}
+        </userContext.Consumer>
+
+it takes js in it and in it takes a function which has an argumnent which will have the value of the userContext
+
+
+if we want something like giving a dynamic data , then we have something like porvider
+
+
+<useContext.Provider value={data}>
+</userContext.Provider>
+inside it we can pass a state , and it is not show that state's data, and these state can be changed , so 
+tecnically  we are changing the userContext, and it is now being reflected across everywhere , where the userContext 
+is used , also we have to pass the prop name as value 
+
+Note -> it is over-riding the userContext , not changing it 
+
+you can also change the context name like when you see in the react dev tools in component
+you will see context.Provider, we can make it unique like changing it 
+useContext.displayname = "userContext"
+it is used for debugging  
+
+----------------------------
+Redux
+it is a state management library used for storing global state/context 
+it is mainly used when our app grows larger and it is complex to handle it 
+if app is small no need to use redux,
+
+
+cons of Redux --> complex to setup, copy-paste code
+
+Redux Toolkit 
+as their were many complexity while writing redux , and to overcome challanges , redux cameup with new way of
+writing redux called reduxtoolkit just like callbased component, is not used , functional component is used 
+similarly redux Toolkit is used 
+
+
+
+
+Redux Store -> at the end of the day ,it is an object, could be access any place in our app
+their will be single store in the app, not unlike context
+
+we will store everything inside the store and will slice , like will slice cart , slice user 
+
+component cannot directly modify the store, it has to dispach the action , that action will call a function and 
+that function will do the logic in it and modify our store/cart
+These function is known as reducer 
+
+when we click on add to cart it will dispach an action that will call a reducer function, which modify our slice of store
+
+Selector -> it is used to read from the slice of the store (read)
+it is also known as subscribing to the store , meaning it is reading something from the store
+
+SETUP
+npm install @reduxjs/toolkit --> these is the redux,like it manages the store , puts data inside it, core library
+npm install react-redux --> these is a bridge between react and redux
+
+
+
+BUILDING OUR STORE 
+to  make our store we uses a hook called configureStore from reduxtoolkit , named import 
+
+now how to use the store , like where will be our store be provided to, we can do for a single component 
+or for whole store, depending upon the  usecase
+so in order to do it we uses Provider from our react-redux and pass our store as a prop 
+and inside the Provider which ever components are their they all can able to access it 
+NOTE ->  you have to name the prop as store 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------
+Different Type of Testing 
+- Manual
+
+- Automation 
+  -Selinium Testing 
+  -E2E Testing
+
+Headless Browser  
+
+Unit Testing -> a particular part of the app we are testing
+
+Integration Testing -> meaning when we test something then the other part of our app changes is known as Integration testing
+
+Jest is a javascript testing framework -> React testing library uses Jest behind the scenes 
+
+React testing library is used to test react applications
+
+SETUP & STEPS 
+
+npm install --save-dev @testing-library/react @testing-library/dom
+npm i jest
+
+then we need to configure jest 
+it is done only once thats why we do -> npx jest --init 
+and it will create a jest.config.js file 
+then we need to install other package too
+npm i -D jest-environment-jsdom
+
+Then we can now able to run test cases , you can see in the package.json  that in the script tag we have test in it 
+
+npm run test 
+
+now we can see that our testcases are able to run but we haven't write any testcases so lets write testcases now 
+
+so now we will create a folder -> __tests__ 
+these is how our jest will determine that inside these folder we have writien our testcase 
+
+now we can create multiple test files and wrtie test cases inside it 
+we name our file as xyz.test.js
+
+syntax for writing test case --> test('testcase name',()=>{
+         expect(sum(2,5)).toBe(7)
+})
+
+now their will be a little problem when we write a test case like above we are writing a test case for the 
+sum function but we need to import the sum function from anywhere we wrote inorder to test it 
+but when we simply import it like we do then it causes error as our jest doesn't know expect javascript
+
+So to solve it we uses bable to solve the problem , what is the role of bable ? --> iBabel is a JavaScript compiler.
+Its job is to take newer JavaScript (like import/export, async/await, JSX, etc.) and convert ("transpile") it into older JavaScript that Node.js or browsers understand.
+so we do the following steps 
+
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+create a bable.config.js file  --> 
+module.exports = {
+  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+};
+now we can run the test cases smotthly without any error 
+
+
+NOTE - we are  not running our app , and yet we are executing the test case, meaning we are not testing 
+it on browser, if it was browser then it would have understood import and we won't be able to need to config it 
+we are using node and jest which underhood uses node to run the tests , we uses a dom like environment called jsdom
+
+So now we understood how to write javascript testcase but when it comes to react lets
+write some testcases accordingly
+
+so for example lets write a test case in react for loading a header component 
+test('loading header when the app render',()=>{
+        render(
+                </Header>
+        )
+})
+so the test case we write is in not real dom but in jsdom , and it is like a container , where we will mention which 
+are the things we want to render, render comes from react testing library
+
+Now if we try to render it, it will cause and error as the support for jsx is not available ,
+now we need to install and configure few things
+
+npm i @babel/preset-react
+also in the babel.config.js we need to do -> module.exports = {
+  presets: [
+    ['@babel/preset-env', { targets: { node: 'current' } }],
+    ['@babel/preset-react', { runtime: "automatic" }],
+  ],
+};
+
+To enable jsx support for jest 
+
+Few other cenario while building testcase 
+when we import a png and use it inside our component ,our jest doesn't understand png file 
+so we will make a mocks file and inside it we will just export something like 
+export default "dummy.png" and in my jest config we will do in our jest.config file  
+their is an modulenameMapper inside it we will config -->  "\\.(jpg|png)$":"./src/mocks/dummyLogo.js"
+these means that when our jest read all png or jpg file rather than converting it into a string it will use
+what is being exported from dummyLogo
+these is known as mocking our data , like we know that some data in our app is coming from other api/component
+then in order to make our jsdom understand it we will make a mock data to replace it 
+
+All these configuration it for rendering the part on jsdom and  we want to test on it , so our jest doesn't understand normal js 
+so we need to do all the configuration
+
+Config -1. -> when like in our original dom we have a header component and we have passed our cart as a context in the form of redux 
+when we try to replicate these in our jsdom then we also need to pass the context in our jsdom 
+so we also wrap in header in provider and pass in the render of our test
+
+Config -2. -> when we use routers like createBrowser for routing and also for the Link we provide , our jest also doesn't understand it 
+so in order to config it we uses something called as {StaticRouter} from "react-router-dom" and also wrap it in our header, so eventually 
+our render will look like ->  
+        <StaticRouter>    
+                <Provider store={store} >
+                        <Header/>
+                </Provider>
+        </StaticRouter>
+
+
+If any further conflict occurs then remember to these priciple --> we are rendering a small part of our component in  a small component called jsdom
+and we somehow need to manage the conflicts like using a mock data or use provider etc..
+when the  component is fully rendered then we will test it 
+
+Now the part comes for testing like we rendered the component in our jsdom but now we need to test it 
+so lets test that if our logo is rendered or not 
+
+we will give something called testid to the part we are testing on component 
+                < img data-testid="logo" src={Logo} className="h-14" alt="swiggy logo"/>
+and we will do something like 
+    const logo =header.getByTestId("logo")
+    expect(logo.src).toBe("http://localhost/dummyimg.png")
+
+as we have made the thing like all the png file will now replace it with dummyimg.png 
+
+---------------------------------------------------------------------
+
+Integration Testing (if one part is changed then our part in our app gets changed )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------
+to learn
+understanding react dev tools (playing with it)
+performance optimization -> react hook form, formik , fetching from backend optimization--> react query, swr
+other routers 
+redux thunk , middlewares , redux documentation 
+redux devtools 
+usememo, useref
+test driven development 
+todo app in cli using js
+ASSIGNMENT 
+How do you create Nested Routes react-router-dom cofiguration
+Read abt createHashRouter, createMemoryRouter from React Router docs.
+Why do we use super(props) in constructor?
+(Research) Why can't we have the callback function of useEffect async?
+
+
+
+
+
+
+
+
+
+
+
+
+
