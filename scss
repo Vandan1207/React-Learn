@@ -56,10 +56,58 @@ cons of tailwind --> hard to read, less readability, too long line of code
 
 pros of tailwind --> no duplicate css, bundle time is small , more customizable,
 a lot more control over the css
+---------------
+So to configure tailwind in parcel , These is how we can do it 
+
+their are two ways to do it 
+1. from the docs , -> 
+        npm install tailwindcss @tailwindcss/postcss
+    .postcssrc file -> {
+                        "plugins": {
+                            "@tailwindcss/postcss": {}
+                        }
+                        }
+    index.css file -> @import "tailwindcss";
+    and load these css file  in the html page 
 
 
+2.the way its working 
+    SO these is all i installed in my dev dependecy 
 
+    "devDependencies": {
+    "@tailwindcss/cli": "^4.1.6",
+    "@tailwindcss/postcss": "^4.1.6",
+    "autoprefixer": "^10.4.21",
+    "parcel": "^2.15.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
+    no package installed in my dependency 
+    also remember the version of these dependency as they work together nicely 
+    and create the following file 
 
+    .postcssrc file -> {
+                        "plugins": {
+                            "@tailwindcss/postcss": {}
+                        }
+                        }
+    tailwind.config.js file -> 
+    /** @type {import('@tailwindcss/postcss').Config} */
+        module.exports = {
+                                content: ["./src/**/*.{html,js,jsx}"],
+                                theme: {
+                                extend: {},
+                                },
+                                plugins: [],
+                            }
+  
+    index.css file -> @tailwind base;
+                        @tailwind components;
+                        @tailwind utilities;    
+
+    App.js file ->  import './index.css'
+
+These may or may not work based on the device you use 
 
 
 ----------

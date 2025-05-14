@@ -105,6 +105,9 @@ syntax->
 --------
 
 also we can't just import in our script file, in order to do it we have to make the script type as modules
+React and other modern libraries (like ReactDOM) are written as ES modules, which use the import/export syntax.
+This syntax only works in scripts that are declared as type "module".
+
 
 we can see that if we make any changes in our file it automatically  gets reflected , without us have to refresh it 
 
@@ -237,7 +240,7 @@ types of component
 it is normal js function which returns a piece of jsx 
 syntax --> name of component starts with capital leter (convention)
 
-const header = ()=>{
+const Header = ()=>{
     return <h2>HEllo </h2>
 }
      
@@ -425,7 +428,7 @@ here we mentione all the routing inside it
 also we also need to tell out app that these is our routings 
 to do it we have RouterProvider from react-router
 it is a component which we place in render and as a prop we pass our routing routes 
-also it is compulsory to use router as our prop name
+also it is compulsory to use router as our prop-name
 
 import {createBrowserRouter,RouterProvider} from 'react-router';
 
