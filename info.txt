@@ -751,9 +751,57 @@ also it takes fallback as a prop where we can pass a component which will be  sh
 
 
 
+-------------------
+This is the second time i am writing about react lifecycle it is more clearner and simpler view about react
+
+So the lifecycle of classbased component , i am talking about class based component will begins as follows
+
+when the classbased component is loaded then first thing is called is the render phase 
+the render phase consist of constructor and render respectively 
+when intially the first time component is loaded then it is in the mouting phase
+so first constructor is called and then render is called 
+let suppose thier is another component inside our component when we are rendering 
+so then the child component's lifecycle is called 
+so child components constructor  is called then its render is called 
+These is the completion of our render phase and also our mouting phase which is called 
+on the intial render/ first time when it is rendered 
+
+Now comes the commit phase->    
+still i am in the mouting phase but its commit's part i am talking about now 
+
+the first thing which will be called is componentdidMount -> in simple word is does my component completed 
+the lifecycle then it is called , 
+so firstly childs component did mount is called then 
+parents component did mount is called, 
+
+It is the best place to make api call , why ? cause in the functional component what 
+we used to do is that when the DOM is loaded/ inital render is completed then we updated the 
+DOM / then we inserted the data , that's why we saw Simmer UI 
 
 
+* Edge case -> when their are two child component then which commit phase will be executed first when it comes 
+to instial render that means which child will execute its componentDidMount first as it is intial render
 
+let suppose their are two child 
+                                <child1 /> 
+                                <child2/>
+then first child1 componentDidMount is called then child2 componentDidMount is called and then
+parrent componentDidMount is called 
+why --> because the parent component is not fully mounted until the the child component is mounted
+and why child1 componentdidMount is called first then child2 componentDidMount ? because child1 got rendered first then child2
+
+
+Now these was the 1st step which is also known as mouting phase 
+if re-rendering takes place then what are the following steps ?
+and how will re-rendering took place ? if their is new prop , setState, forceUpdate 
+then re-rendering takes place and componentdidUpdate tookplace 
+componentdidUpdate will be called after every render , after intial render
+and the sequence is child1 componentdidUpdate then child2 componentdidUpdate then 
+Parent componentdidUpdate
+
+
+and finally componentwillunmount be called when the component gets removed 
+in simple words when component is not used / we got redirected then it will be called 
 
 
 
