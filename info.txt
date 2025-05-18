@@ -634,7 +634,7 @@ in  these way we send and recive props in Outlet
 
 now while learing basics about the classbased component we have few component inside it 
 which are 
-componentdidMount() which is called after render --> best for API call 
+componentdidMount() which is called after intial render --> best for API call 
 componentupdate() which is called after every state change (render) 
 componentwillunmount() which is called after every component's unmounthing , when we stwitch to another Component
 
