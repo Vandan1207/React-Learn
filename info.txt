@@ -671,7 +671,7 @@ parent componentdidMount
 
 --------------------------------
 similar to these we have in our functional component is useEffect
-we can pass an [] , in useEffect , so it will call only once and after render
+we can pass an [] , in useEffect , so it will call only once and after intial  render
 also similar to componentwillunmount, we have return in useEffect , that 
 would be returned once it gets unmounted,meaning after the component is changed
 
@@ -886,14 +886,6 @@ creating your own library
 
 
 
-learn today
-passing props in the nested routing 
-class based component 
-redux--> action
-reducer
-slice
-store
-state
 
 
 
@@ -911,7 +903,14 @@ General Ans --> why our app is fast ?
 it is not just because of reacts virtual dom , but because of parcel , bundlers, react's reconsiliation algorithm
 react fibre , react-router, minification etc....
 
-
+So, What Exactly is React Then?
+React is the logic and rendering engine.
+It defines how components are structured, how they render, and how they update.
+It doesn’t handle:
+Bundling
+Compilation
+HMR
+Those are done by build tools, not by React itself.
 
 
 
