@@ -110,6 +110,19 @@ their are two ways to do it
 These may or may not work based on the device you use 
 
 
+3. When using it using webpack we do the following but the config file, tailwind.config will be appiled to any other bundler 
+meaning is these tailwind.config.js file could be used on our app no matter which bundler you're using 
+
+so for webpack we do the following
+    -npm i tailwindcss 
+just only these step no other postcss, nothing need to do to install 
+now comes tailwind configuration which should be done and the content part could be applied to any bundler 
+
+when we do npx tailwindcss init , it will create a tailwind .config.js file and inside content we write the following 
+    ".src/**/*/.{js,html}"
+
+meaning all my files under src that contains js or html , we have to apply tailwindcss to it 
+and also finally import tailwind in App.js
 ----------
 to complete 
 ways to learning css 
