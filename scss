@@ -123,6 +123,12 @@ when we do npx tailwindcss init , it will create a tailwind .config.js file and 
 
 meaning all my files under src that contains js or html , we have to apply tailwindcss to it 
 and also finally import tailwind in App.js
+
+also in index.css do 
+    @tailwind base
+    @tailwind utilites
+    @tailwind components
+    
 ----------
 to complete 
 ways to learning css 
