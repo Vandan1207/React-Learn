@@ -1,0 +1,21 @@
+    Machine Coding Round
+
+This is where company ask you to build something either in pure HTML, CSS, vanilla js or the tech stack you are getting hierd  
+example- todo , fetch data from api, quiz app, Nested filter, carousal 
+
+First and formost whenever you get asked to build something in the interview like build youtube then rather than opening 
+vs-code and start typing you should ask the first question which is what are the requirements 
+second - features to develop 
+then - tech stack 
+    like with react i will use tailwind, will use redux/contextAPI for state management etc...
+then spet time in planning thingd up 
+    - UI design, flow , How to structure your components , Low level design
+    - in simple words to discuss your apporach and to be in the same page with interviewer 
+
+now rather than starting the project from start, intializing the project downloading the bundler, tailwind etc.. 
+tell your interviewer that we will build it using create react app , that would take less time `and it would give me the 
+whole app but we in the real world project we can coustomize our project like choosing our bundler and all  
+
+
+So when building something , start with doing small things, for example their is a list and we have to render data of that list 
+so firstly we will make it run for one list and then check does it works? and then we will use map to render 
