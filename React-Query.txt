@@ -1,0 +1,9 @@
+Tankstack/React Query 
+
+Earlier it was react query but now it got changed to Tankstack as now , it can be worked/ used across every platfrom so it got changed to 
+Tankstack is used to manage the fetching from frontend , and automatically provides caching , refetching etc.. Lets dive deep
+
+Tankstack is a library that helps you manage the state of the data you fetch from server like api in your react application
+
+we already have useState useEffect and for global application we have contextAPI , then what is the need to react query?
+Tankstack replaces manual work of fetching data , caching it   
