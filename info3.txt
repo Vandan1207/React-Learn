@@ -18,4 +18,64 @@ whole app but we in the real world project we can coustomize our project like ch
 
 
 So when building something , start with doing small things, for example their is a list and we have to render data of that list 
-so firstly we will make it run for one list and then check does it works? and then we will use map to render 
+so firstly we will make it run for one list and then check does it works? and then we will use map to render    
+
+A function that takes a component as argumnent and returns a component is known as higher order component
+
+
+Debouncing ->
+Debouncing in React is a technique used to delay the execution of a function until after a certain period of time has passed since it was last called.
+            This is particularly useful for optimizing performance when dealing with events that fire frequently, 
+            like user input in search boxes, window resizing, or button clicks.
+
+ It increases the performance , 
+    like instead of   14 api call for iphone pro max, we can do 5 , then what about 1000 coustomer calling these api
+    how drastically we reduced the api call 
+
+so when i say Debouncing 200ms
+    - meaning , bwtween two key stroke if it is less then 200mx , then decline the api call 
+    - if it is greater then 200ms the call the api 
+
+Caching -> When we do an event , it could be calling an api so something then if we do the same event , rather than calling 
+an API for it , it can be done by the means of caching 
+So what we do is we store that api call's data into our redux store and when the same api is called , rather than calling that 
+api again, we fetch it from the redux store, these is used in various places like search api
+rather than giving suggestions for the same search keyword , we store into redux and give the suggestions from the store
+
+
+Nested Comments - So when we open comments in youtube that comments are 2 level comments meaning , when somebody reply to it
+they gets showed inside it , but when we see the comments of reddit , they are nested comments or also known as n level comments
+These could be more understood if see the picture of nested comments online , we are building these into our app , where also we
+will learn recursion of component in React , these could be understood by the means of code -->
+
+
+
+Live Chat
+we can see their is an page where data is coming at a flow , or we can say that the data is getting changed constantly
+so we now know the problem which is the data which is being coming at a constant pace, where thousands of user are chating it 
+how we are getting the data and the another challange is updating the data on our app , we can see that we are appending a div
+which has some text in it and showing some comment , the question arises , if we append a div then after an hour or two the user's 
+applicaion must be bloted and must get freeze and we are pushing data into it , but that is not the case for youtube , so how does 
+it manages ? let's dive deep into it now
+
+
+
+so talking about live data -->  to handle the live data for our app we can do the following 
+1. web Sockets
+     It is a two way communication , where handshake is done between the frontend and the server and in between the data 
+     will be flowing in to our app , here anyone can send data and the data coming from the server doesn't have a fixed flow
+     Anytime the data is flowen in the app
+    example- whatsapp, trading app
+
+2. API Pooling / Long Pooling
+    It is line one way communication where the frontend calls the server at an interval and the data is been flowen 
+    from the server to our app at a constant interval
+    example- simplyart, gmail, Cricbuzz 
+
+Depending upon the usecase we use each method 
+
+
+
+
+
+
