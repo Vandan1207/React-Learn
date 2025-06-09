@@ -70,12 +70,54 @@ so talking about live data -->  to handle the live data for our app we can do th
 2. API Pooling / Long Pooling
     It is line one way communication where the frontend calls the server at an interval and the data is been flowen 
     from the server to our app at a constant interval
-    example- simplyart, gmail, Cricbuzz 
+    example- simplyart, gmail, Cricbuzz , Youtube live 
 
 Depending upon the usecase we use each method 
 
+Now coming on youtube ,
+We will be building live functionality through which we would be learning various things
+
+Youtube live chat does API Pooling , rather than Web Sockets
+Now When we see the chat of yt live , we can see that the comments made by user's are getting appedned 
+in our dom , then the question arises if so many data gets appended in the app then the app/web page
+must get frozen, but what happens behind the scenes is that , after a certain point /Comments youtube
+starts removing the comments from the chat 
+
+In these way the app doesn't get bloted / freeze
+
+youtube goes a mile further by doing things like if my browser version is older , or i am using firefox
+or using internet explorer , then keep the comment limit to XYZ , these is how yt makes best user experience
 
 
+-----------------------------------------------------------------------------------------------------------------
+useMemo --> it is a hook that is used to cache the result between re-render's 
+when creating large applicaion , during re-rendering of any state , we all know that the whole 
+component is re-rendered when the state is being changed , so if their is any heavy operations going in the component 
+then it will be called again , heavy in terms of computaional heavy , browser heavy , so these calcualtion , or things like 
+that will be called again , so  such type of issue can be handled using useMemo hook 
+
+const cachedValue = useMemo(calculateValue, dependencies)
+
+here calculateValue , is the value that might be coming from any function , and we are storing that value , so between re -render
+that value is shown , and dependencies is an array , that tells that call the calculateValue , when and only the dependencies changes
+
+
+
+
+
+
+
+
+
+To do 
+Infinite Scroll
+How to bypass corss error without extension
+give chatgpt your answer to comment which are adding in the dom , by the means of react-virtual dom and reconsiliation
+in the params - api i had given ?= , what is the proper name and how to access in the component 
+e.preventdefault() , what is e in detail also , what are the other things i am missing when it comes to e.preventDefault()
+React Strictmode 
+
+in the vedio , the given example of useMemo can be solved by useEffect ? check it and say 
 
 
 
