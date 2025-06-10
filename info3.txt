@@ -102,6 +102,21 @@ here calculateValue , is the value that might be coming from any function , and 
 that value is shown , and dependencies is an array , that tells that call the calculateValue , when and only the dependencies changes
 
 
+useCallback --> is a hook that lets you cache a function defination between re-renders
+
+
+useRef --> is a hook that let you reference a value that's not needed for rendering
+
+So in simple words --> useRef lets you store a variable which is persisted , which means its value gets stored even though 
+rendering takes places
+example -> their is let variable and we use it internally in our component , but when the component is re-render then the 
+value of the let variable gets refreshed , and these is core javascript thing, as our component in the end of the day is 
+a function , so when a function is executed , it get's its own lexical environment and all.. 
+so the let variable gets wiped out when our component re-render, but if the same variable is ref then the react persists
+its value meaning react will store its value and the value will not be wiped even though re-rendering happens 
+
+Also most important , updating use ref doesn't generate re-render, unlike state that generates re-render
+
 
 
 
